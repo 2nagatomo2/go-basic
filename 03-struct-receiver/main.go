@@ -40,9 +40,12 @@ func main() {
 	fmt.Printf("task1 value receiver: %+v\n", task1.Estimate)
 }
 
+// 値レシーバー
 func (task Task) extendEstimate() {
 	task.Estimate += 10
 }
+
+// ポインタレシーバー
 func (taskp *Task) extendEstimatePointer() {
 	taskp.Estimate += 10
 }
