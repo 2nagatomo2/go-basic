@@ -31,6 +31,7 @@ func main() {
 		time.Sleep(300 * time.Millisecond)
 	}
 
+	// for loop に名前をつけておき，break の後にloopを抜ける処理をかく
 loop:
 	for i := 0; i < 10; i++ {
 		switch i {
@@ -46,14 +47,20 @@ loop:
 	}
 	fmt.Printf("\n")
 
+	// item構造体のスライス
 	items := []item{
 		{price: 10.},
 		{price: 20.},
 		{price: 30.},
 	}
+
+	// これでは構造体の各要素にアクセスされない．
+	// コピーが作成される．
 	for _, i := range items {
 		i.price *= 1.1
 	}
+
+	// インデックスを使ってアクセスすれば書き換えられる．
 	fmt.Printf("%+v\n", items)
 	for i := range items {
 		items[i].price *= 1.1
