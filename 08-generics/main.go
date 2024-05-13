@@ -7,11 +7,16 @@ import (
 )
 
 type customConstraints interface {
+	// ~ をつけると ~ の後ろの型をもとに作られた型も constraints に含むことができる．
+	// 今回は，NewInt を customConstraints interface に含むことができる．
 	~int | int16 | float32 | float64 | string
 }
 type NewInt int
 
 func add[T customConstraints](x, y T) T {
+	// Tという型が取れる型を constraintsとして定義する．
+	// 複数の引数の型が同じ場合は，一つにまとめられる．
+	// ここでまとめないと，int と string という引数の型があり得てしまう．
 	return x + y
 }
 func min[T constraints.Ordered](x, y T) T {
@@ -22,6 +27,7 @@ func min[T constraints.Ordered](x, y T) T {
 }
 func sumValues[K int | string, V constraints.Float | constraints.Integer](m map[K]V) V {
 	var sum V
+	// for range を使うと map では key と value を受け取れる．
 	for _, v := range m {
 		sum += v
 	}
